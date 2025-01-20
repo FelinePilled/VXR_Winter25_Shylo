@@ -1,65 +1,55 @@
+using System;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
-using UnityEngine.XR.Interaction.Toolkit;
-using System;
-
 
 
 [RequireComponent(typeof(XRGrabInteractable))]
 
-
 public class Blade : MonoBehaviour
 {
-    public XRGrabInteractable m_GrabInteractable;
-    public ControllerDataReader m_ControllerDataReader;
+    public XRGrabInteractable m_grabInteractable;
+    public ControllerDataReader m_controllerDataReader;
     XRBaseInteractor m_interactor;
 
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
 
-    private void Awake()
+    void Awake()
     {
-        m_GrabInteractable = GetComponent<XRGrabInteractable>();
-
+        m_grabInteractable = GetComponent<XRGrabInteractable>();
     }
 
     private void OnEnable()
     {
-        if (m_GrabInteractable == null)
+        if (m_grabInteractable == null)
             return;
-        m_GrabInteractable.selectEntered.AddListener(OnSelectEnter);
-        m_GrabInteractable.selectExited.AddListener(ResetControllerDataReader);
+
+        m_grabInteractable.selectEntered.AddListener(OnSelectEnter);
+        m_grabInteractable.selectExited.AddListener(ResetControllerDataReader);
     }
 
     private void ResetControllerDataReader(SelectExitEventArgs arg0)
     {
-        m_ControllerDataReader = null;
+        m_controllerDataReader = null;
     }
 
     private void OnSelectEnter(SelectEnterEventArgs arg0)
     {
-        //ser to interactor that is grabbing the axe
+        //set to interactor that is grabbing the axe
         m_interactor = arg0.interactorObject as XRBaseInteractor;
 
-        //set the controller data reader
-        m_ControllerDataReader = m_interactor.gameObject.GetComponentInParent<ControllerDataReader>();
+        //set the controllerDataREader
+        m_controllerDataReader = m_interactor.gameObject.GetComponentInParent<ControllerDataReader>();
     }
 
     private void OnDisable()
     {
-        if (m_GrabInteractable == null)
+        if (m_grabInteractable == null)
             return;
-        m_GrabInteractable.selectEntered.RemoveListener(OnSelectEnter);
-        m_GrabInteractable.selectExited.RemoveListener(ResetControllerDataReader);
-    }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
+
+        m_grabInteractable.selectEntered.RemoveListener(OnSelectEnter);
+        m_grabInteractable.selectExited.RemoveListener(ResetControllerDataReader);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
