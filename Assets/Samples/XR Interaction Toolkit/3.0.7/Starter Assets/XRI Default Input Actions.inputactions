@@ -1523,6 +1523,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "GatoSpawn",
+                    "type": "Button",
+                    "id": "e3259ba6-9fb8-4d75-81f7-5ab57b746869",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -1930,6 +1939,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Thumbstick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "915f6ef2-42a1-4d46-86bb-ec58116838d2",
+                    "path": "<OculusTouchController>/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GatoSpawn",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
