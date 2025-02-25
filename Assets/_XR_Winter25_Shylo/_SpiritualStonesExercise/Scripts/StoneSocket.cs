@@ -7,7 +7,7 @@ using UnityEngine;
         [Tooltip("Drag one of the three spiritual stones in here")] //This allows us to display some text when hovering over the variable name in the editor.
         [SerializeField] string Stone;
         public bool isOccupy = false;
-        static int NumberOfStones = 0;
+        public static int NumberOfStones = 0;
         [SerializeField] SlidingDoor SlidingDoor;
         [SerializeField] AudioSource AudioSource;
 
@@ -23,11 +23,11 @@ using UnityEngine;
                 Debug.Log($"{NumberOfStones} gameobject entered the trigger");
             }
 
-        if (NumberOfStones == 3) 
-        {
-            SlidingDoor.Open();
-            AudioSource.Play();
-        }
+            //if (NumberOfStones == 3) 
+            //{
+            //    SlidingDoor.Open();
+            //    AudioSource.Play();
+            //}
 
         }
 
