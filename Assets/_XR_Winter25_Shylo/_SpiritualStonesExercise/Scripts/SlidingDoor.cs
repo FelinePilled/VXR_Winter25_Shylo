@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Tutorials.Core.Editor;
 using UnityEngine;
 
 
@@ -13,7 +14,31 @@ using UnityEngine;
 
         private Coroutine doorSlideCoroutine;
 
-        void Start()
+        //[SerializeField] StoneSocket FireStoneSocket;
+        //[SerializeField] StoneSocket ForestStoneSocket;
+        //[SerializeField] StoneSocket WaterStoneSocket;
+
+
+
+    private void OnEnable()
+    {
+        //Subscribing to events
+        StoneSocket.OnAllStonesPlaced += Open;
+        //ForestStoneSocket.OnAllStonesPlaced += Open;
+        //WaterStoneSocket.OnAllStonesPlaced += Open;
+    }
+
+    private void OnDisable()
+    {
+        //Subscribing to events
+        StoneSocket.OnAllStonesPlaced -= Open;
+        //ForestStoneSocket.OnAllStonesPlaced -= Open;
+        //WaterStoneSocket.OnAllStonesPlaced -= Open;
+    }
+
+
+
+    void Start()
         {
             Close();
         }
@@ -35,10 +60,11 @@ using UnityEngine;
         }
 
         [ContextMenu("Open")] // This allows running the function from the Editor to test it (dotStack Menu next to Component Name). Only works for functions with no parameters.
-        public void Open()
+        private void Open(StoneSocket socket)
         {
             StopDoorSlideCoroutine(); // Stop any existing coroutine to avoid conflicts
             doorSlideCoroutine = StartCoroutine(SlideDoor(openDoorPosition.position));
+            Debug.Log(socket.gameObject.name);
         }
 
         [ContextMenu("Close")] 
